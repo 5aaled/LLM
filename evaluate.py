@@ -12,7 +12,7 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT / "src"))
 
 from pulsevents.evaluation import evaluate_rag, evaluate_retrieval, load_annotated_dataset  # noqa: E402
-from pulsevents.rag import EventRAG  # noqa: E402
+from pulsevents.rag import EventRAG
 
 
 def main() -> None:

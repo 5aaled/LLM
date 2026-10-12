@@ -1,4 +1,4 @@
-"""Question en ligne de commande (démo sans Streamlit)."""
+"""Démo live : une question en ligne de commande."""
 
 from __future__ import annotations
 

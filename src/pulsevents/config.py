@@ -1,4 +1,3 @@
-"""Configuration centrale du POC Puls-Events."""
 
 from __future__ import annotations
 
@@ -18,16 +17,16 @@ CITY = os.getenv("CITY", "Paris").strip()
 COUNTRY_CODE = os.getenv("COUNTRY_CODE", "FR").strip()
 MAX_EVENTS = int(os.getenv("MAX_EVENTS", "350"))
 
-# Modèles Mistral (plateforme cloud)
+
 EMBEDDING_MODEL = "mistral-embed"
-CHAT_MODEL = "mistral-small-latest"
+CHAT_MODEL = "ministral-8b-latest"
 
 CHUNK_SIZE = 1200
 CHUNK_OVERLAP = 150
 SEARCH_K = 5
 EMBEDDING_BATCH_SIZE = 16
 
-# Paris intramuros (approx.)
+
 PARIS_BBOX = {
     "south": 48.8156,
     "north": 48.9022,
@@ -48,7 +47,7 @@ DOCS_DIR = PROJECT_ROOT / "docs"
 OPENAGENDA_BASE_URL = "https://api.openagenda.com/v2"
 OPENAGENDA_PAGE_SIZE = 100
 
-# Agendas / slugs utiles pour Paris (découverte + repli)
+
 PARIS_AGENDA_SLUGS = (
     "que-faire-a-paris",
     "que-faire-a-paris-1",
@@ -63,7 +62,7 @@ def now_utc() -> datetime:
 
 
 def freshness_cutoff() -> datetime:
-    """Événements de moins d'un an (historique 12 mois + à venir)."""
+
     return now_utc() - timedelta(days=365)
 
 

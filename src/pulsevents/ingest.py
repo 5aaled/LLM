@@ -1,4 +1,4 @@
-"""Collecte des événements OpenAgenda pour Paris."""
+
 
 from __future__ import annotations
 
@@ -31,7 +31,7 @@ def _session() -> requests.Session:
         {
             "key": key,
             "Authorization": f"Bearer {key}",
-            "Accept": "application/json",
+            "Accept": "application/json",  # "I want the response in JSON format."
             "User-Agent": "PulsEvents-RAG-POC/0.1",
         }
     )
@@ -39,7 +39,7 @@ def _session() -> requests.Session:
 
 
 def _get_json(session: requests.Session, url: str, params: Optional[dict] = None) -> dict[str, Any]:
-    last_error: Optional[Exception] = None
+    last_error = None
     for attempt in range(4):
         try:
             response = session.get(url, params=params, timeout=30)
@@ -57,8 +57,8 @@ def _get_json(session: requests.Session, url: str, params: Optional[dict] = None
 
 
 def discover_paris_agendas(session: requests.Session) -> list[dict[str, Any]]:
-    """Trouve des agendas officiels / pertinents pour Paris."""
-    found: dict[int, dict[str, Any]] = {}
+
+    found  = {}
 
     for slug in PARIS_AGENDA_SLUGS:
         payload = _get_json(
@@ -91,7 +91,7 @@ def discover_paris_agendas(session: requests.Session) -> list[dict[str, Any]]:
     return agendas
 
 
-def _event_params(after: Optional[list] = None, rich: bool = True) -> dict[str, Any]:
+def _event_params(after  = None, rich: bool = True) -> dict[str, Any]:
     params: dict[str, Any] = {
         "size": OPENAGENDA_PAGE_SIZE,
         "relative[]": ["current", "upcoming"],
@@ -144,7 +144,7 @@ def fetch_events_from_agenda(
 
 
 def fetch_events_cross_agenda(session: requests.Session, max_events: int) -> list[dict[str, Any]]:
-    """Recherche transverse (expérimentale) — utile si elle est ouverte sur la clé."""
+
     events: list[dict[str, Any]] = []
     after = None
     url = f"{OPENAGENDA_BASE_URL}/events"
@@ -166,12 +166,9 @@ def fetch_events_cross_agenda(session: requests.Session, max_events: int) -> lis
 
 
 def fetch_openagenda_events(max_events: int = MAX_EVENTS) -> list[dict[str, Any]]:
-    """
-    Récupère des événements Paris, dédupliqués par uid.
-    Essaie d'abord la recherche transverse, puis les agendas découverts.
-    """
+
     session = _session()
-    by_uid: dict[int, dict[str, Any]] = {}
+    by_uid  = {}
 
     cross = fetch_events_cross_agenda(session, max_events=max_events)
     for event in cross:
@@ -182,7 +179,7 @@ def fetch_openagenda_events(max_events: int = MAX_EVENTS) -> list[dict[str, Any]
     if len(by_uid) < max_events:
         agendas = discover_paris_agendas(session)
         remaining = max_events - len(by_uid)
-        per_agenda = max(50, remaining // max(len(agendas), 1))
+        per_agenda = max(50, remaining // max(len(agendas), 1))   # how many events to request from each agenda.
         for agenda in agendas:
             uid = agenda.get("uid")
             if not uid:

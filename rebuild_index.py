@@ -12,17 +12,17 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT / "src"))
 
-from pulsevents.config import (  # noqa: E402
+from pulsevents.config import (
     CITY,
     MAX_EVENTS,
     PROCESSED_EVENTS_PATH,
     VECTOR_STORE_DIR,
 )
 
-from pulsevents.evaluation import build_annotated_dataset  # noqa: E402
-from pulsevents.index import build_faiss_index  # noqa: E402
-from pulsevents.ingest import fetch_openagenda_events, load_raw_events  # noqa: E402
-from pulsevents.preprocess import events_to_documents, structure_events  # noqa: E402
+from pulsevents.evaluation import build_annotated_dataset
+from pulsevents.index import build_faiss_index
+from pulsevents.ingest import fetch_openagenda_events, load_raw_events
+from pulsevents.preprocess import events_to_documents, structure_events
 
 
 def main() -> None:
@@ -32,17 +32,16 @@ def main() -> None:
     parser.add_argument(
         "--skip-fetch",
         action="store_true",
-        help="Réutilise data/raw/openagenda_events.json sans rappeler l'API.",
     )
     parser.add_argument("--max-events", type=int, default=MAX_EVENTS)
     parser.add_argument(
         "--skip-index",
         action="store_true",
-        help="Arrête après le prétraitement (pas d'appels embeddings Mistral).",
     )
-    args = parser.parse_args()
 
-    logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
+    args = parser.parse_args()   # read the arguments the user actually provided.
+
+
 
     if args.skip_fetch:
         raw = load_raw_events()

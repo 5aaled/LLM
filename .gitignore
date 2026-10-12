@@ -16,3 +16,4 @@ vector_store/*
 !vector_store/.gitkeep
 *.log
 .streamlit/secrets.toml
+try.py

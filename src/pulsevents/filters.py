@@ -1,4 +1,4 @@
-"""Filtres géographiques (Paris) et temporels (moins d'un an)."""
+
 
 from __future__ import annotations
 
@@ -17,10 +17,10 @@ def parse_iso_datetime(value: Optional[str]) -> Optional[datetime]:
     if not value:
         return None
     text = value.strip()
-    if text.endswith("Z"):
+    if text.endswith("Z"):    #“Because Z means UTC, and I replace it with +00:00, which is the UTC offset format that Python’s datetime.fromisoformat() can parse consistently.”
         text = text[:-1] + "+00:00"
     try:
-        dt = datetime.fromisoformat(text)
+        dt = datetime.fromisoformat(text)    # parses an ISO date/time string and converts it into a Python datetime object.
     except ValueError:
         return None
     if dt.tzinfo is None:
@@ -29,7 +29,7 @@ def parse_iso_datetime(value: Optional[str]) -> Optional[datetime]:
 
 
 def event_date_bounds(event: dict[str, Any]) -> tuple[Optional[datetime], Optional[datetime]]:
-    """Retourne (début, fin) à partir des timings OpenAgenda."""
+
     starts: list[datetime] = []
     ends: list[datetime] = []
 
@@ -56,7 +56,7 @@ def event_date_bounds(event: dict[str, Any]) -> tuple[Optional[datetime], Option
 
 
 def is_in_paris(event: dict[str, Any], city: str = CITY) -> bool:
-    """True si l'événement est localisé à Paris intramuros."""
+
     location = event.get("location") or {}
     city_value = (
         location.get("city")
@@ -99,10 +99,7 @@ def is_in_paris(event: dict[str, Any], city: str = CITY) -> bool:
 
 
 def is_within_one_year(event: dict[str, Any], now: Optional[datetime] = None) -> bool:
-    """
-    Événement récent : au moins une date dans [aujourd'hui - 365 jours, +inf[.
-    Couvre l'historique d'un an et les événements à venir.
-    """
+
     from datetime import timedelta
 
     start, end = event_date_bounds(event)
@@ -114,7 +111,7 @@ def is_within_one_year(event: dict[str, Any], now: Optional[datetime] = None) ->
 
 
 def filter_events(
-    events: Iterable[dict[str, Any]],
+    events,
     city: str = CITY,
     now: Optional[datetime] = None,
 ) -> list[dict[str, Any]]:

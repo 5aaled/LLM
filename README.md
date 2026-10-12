@@ -5,16 +5,18 @@ Preuve de concept (POC) : **RAG** (Retrieval-Augmented Generation) avec **LangCh
 
 Les livrables applicatifs sont en **français**. L’interface de démonstration aussi.
 
+The original course brief (Jeremy’s email, expected deliverables, guided steps) is in **[`MISSION.md`](./MISSION.md)**.
+
 ---
 
 ## 1. Ce qui tourne en local vs ce qui est en ligne
 
 | Composant | Où ça s’exécute |
 | --- | --- |
-| Python, LangChain, FAISS (`faiss-cpu`), Streamlit, tests | **Machine locale** |
+| Python, LangChain, FAISS (`faiss-cpu`), tests | **Machine locale** |
 | Index vectoriel | Fichiers dans `vector_store/` |
 | API OpenAgenda | Internet (collecte des événements) |
-| API Mistral (embeddings `mistral-embed` + chat `mistral-small-latest`) | Internet (console.mistral.ai) |
+| API Mistral (embeddings `mistral-embed` + chat `ministral-8b-latest`) | Internet (console.mistral.ai) |
 
 Pas de GPU, pas de cloud (AWS/GCP), pas de base vectorielle hébergée.
 
@@ -84,7 +86,7 @@ Pipeline :
 ## 5. Démo live (chatbot)
 
 ```bash
-streamlit run app.py
+python ask.py "Propose-moi un concert à Paris"
 ```
 
 Chaque question est indépendante : **pas d’historique de conversation** dans le POC, conformément au brief.
@@ -161,7 +163,7 @@ Question utilisateur  →  embedding  →  top-k extraits  →  Mistral (génér
 
 ```
 project/
-  app.py                  # démo Streamlit
+  ask.py                  # démo en ligne de commande
   rebuild_index.py        # reconstruction de l'index
   evaluate.py             # qualité vs jeu annoté
   check_setup.py
@@ -182,7 +184,7 @@ project/
 | Orchestration | LangChain | Imposé + chaînes retriever → prompt → LLM |
 | Vecteurs | FAISS `IndexFlatIP` (via LangChain) | Local, CPU, adapté au volume du POC |
 | Embeddings | `mistral-embed` | Cohérent avec la plateforme Mistral du brief |
-| LLM | `mistral-small-latest` | Latence / coût d’un POC, français correct |
+| LLM | `ministral-8b-latest` | Autorisé par la clé Mistral du POC, français correct, faible latence |
 | Données | OpenAgenda | Source publique demandée |
 | Périmètre | Paris intramuros | Volume suffisant, filtres testables |
 

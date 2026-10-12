@@ -1,4 +1,3 @@
-"""Nettoyage, structuration et découpage des événements pour l'indexation."""
 
 from __future__ import annotations
 
@@ -67,7 +66,7 @@ def normalize_event(event: dict[str, Any]) -> dict[str, Any]:
             f"Titre: {title}" if title else "",
             f"Lieu: {venue}" if venue else "",
             f"Adresse: {address}, {city} {postal}".strip(", "),
-            f"Dates: {date_label or _iso(start)}" if (date_label or start) else "",
+            f"Dates: {_iso(start) or date_label}" if (start or date_label) else "",
             f"Début: {_iso(start)}" if start else "",
             f"Fin: {_iso(end)}" if end else "",
             f"Mots-clés: {', '.join(str(k) for k in kw_list)}" if kw_list else "",
@@ -107,7 +106,7 @@ def structure_events(raw_events: list[dict[str, Any]], max_events: int = MAX_EVE
     filtered.sort(
         key=lambda e: len(localized(e.get("longDescription") or e.get("description") or "")),
         reverse=True,
-    )
+    )    # Why? Because richer events contain more information that can be useful later for the RAG system.
     candidates = []
     seen = set()
     for event in filtered:

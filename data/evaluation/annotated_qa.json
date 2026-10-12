@@ -1,6 +1,6 @@
 [
   {
-    "id": "title-1",
+    "id": "q1",
     "question": "Peux-tu me parler de l'événement « Premières rencontres européennes des Bernardins : journée de débats » à Paris ?",
     "event_uid": 4953312,
     "annotated_answer": "Premières rencontres européennes des Bernardins : journée de débats se déroule à Collège des Bernardins, 20 Rue de Poissy, 75005 Paris, France (Paris 75005). Période: 2026-09-12T06:15:00+00:00. Cette journée rassemble des personnalités politiques, économiques, intellectuelles et religieuses de plusieurs pays européens de sensibilités différentes pour leur permettre d’échanger sur l’avenir...",
@@ -11,7 +11,7 @@
     "source_url": "https://openagenda.com/events/premieres-rencontres-europeennes-des-bernardins-journee-de-debats"
   },
   {
-    "id": "title-2",
+    "id": "q2",
     "question": "Peux-tu me parler de l'événement « Visites de l’église Saint-Christophe de Javel » à Paris ?",
     "event_uid": 94409006,
     "annotated_answer": "Visites de l’église Saint-Christophe de Javel se déroule à Église Saint-Christophe-de-Javel, 28 Rue de la Convention, 75015 Paris, France (Paris 75015). Période: 2026-09-19T13:00:00+00:00. Réalisée de 1926 à 1930 par l'architecte Charles-Henri Besnard, l'église est dédiée à saint Christophe, patron des voyageurs, en raison de l'ancienne importance dans le quartier de Javel des de et de…",
@@ -22,7 +22,7 @@
     "source_url": "https://openagenda.com/events/visites-de-leglise-saint-christophe-de-javel"
   },
   {
-    "id": "title-3",
+    "id": "q3",
     "question": "Peux-tu me parler de l'événement « Jorge Vistel ‘Cuban SongBook’ » à Paris ?",
     "event_uid": 78446595,
     "annotated_answer": "Jorge Vistel ‘Cuban SongBook’ se déroule à JASS CLUB, 141 Rue de Tolbiac, Paris (Paris). Période: 2026-09-12T17:30:00+00:00. 19h30 & 21h30Une plongée à la croisée de la musique cubaine et du jazz, c'est la proposition du trompettiste Jorge Vistel. Ce soir, il nous présente ‘Cuban SongBook’, un projet où il revisite des ...",
@@ -33,7 +33,7 @@
     "source_url": "https://openagenda.com/events/jorge-vistel-cuban-songbook"
   },
   {
-    "id": "title-4",
+    "id": "q4",
     "question": "Peux-tu me parler de l'événement « Gulahallat – Rencontres avec l’art contemporain sámi » à Paris ?",
     "event_uid": 84652268,
     "annotated_answer": "Gulahallat – Rencontres avec l’art contemporain sámi se déroule à Institut finlandais, 60 rue des Écoles (Paris). Période: 2026-09-11T09:00:00+00:00. L’Institut finlandais présente l’exposition Gulahallat – Rencontres avec l’art contemporain sámi qui rassemble des œuvres d’artistes majeurs et une sélection d’artisanat en partenariat avec Oulu 2026.",
@@ -44,7 +44,7 @@
     "source_url": "https://openagenda.com/events/gulahallat-rencontres-avec-lart-contemporain-sami"
   },
   {
-    "id": "title-5",
+    "id": "q5",
     "question": "Peux-tu me parler de l'événement « Rencontre avec Seh-lynn Chai, co-autrice de « Deux Coréennes » » à Paris ?",
     "event_uid": 58114263,
     "annotated_answer": "Rencontre avec Seh-lynn Chai, co-autrice de « Deux Coréennes » se déroule à Centre Culturel Coréen, 20 rue la Boétie 75008 Paris, France (Paris 75008). Période: 2026-09-17T17:00:00+00:00. Saluée sur la scène internationale pour la force humaniste de son écriture, l’autrice sud-coréenne Seh-lynn Chai explore les réalités complexes de la péninsule coréenne et le destin d’un peuple divisé",
@@ -55,7 +55,7 @@
     "source_url": "https://openagenda.com/events/rencontre-avec-seh-lynn-chai-co-autrice-de-deux-coreennes"
   },
   {
-    "id": "title-6",
+    "id": "q6",
     "question": "Peux-tu me parler de l'événement « Exposition « La grotte de Seokguram : le Secret millénaire de l’art bouddhique » » à Paris ?",
     "event_uid": 54080946,
     "annotated_answer": "Exposition « La grotte de Seokguram : le Secret millénaire de l’art bouddhique » se déroule à CENTRE CULTUREL CORÉEN, 20 Rue La Boétie, 75008 Paris (Paris 75008). Période: 2026-10-02T08:00:00+00:00. La grotte de Seokguram, située à Gyeongju, est inscrite au patrimoine mondial de l’UNESCO. À travers ce site, l'exposition invite le public à découvrir l’art bouddhique millénaire du royaume du Silla.",
@@ -66,73 +66,25 @@
     "source_url": "https://openagenda.com/events/exposition-la-grotte-de-seokguram-le-secret-millenaire-de-lart-bouddhique"
   },
   {
-    "id": "theme-1",
-    "question": "Quels événements autour de « cuban jazz » me recommandes-tu à Paris ?",
-    "event_uid": 78446595,
-    "annotated_answer": "Jorge Vistel ‘Cuban SongBook’ se déroule à JASS CLUB, 141 Rue de Tolbiac, Paris (Paris). Période: 2026-09-12T17:30:00+00:00. 19h30 & 21h30Une plongée à la croisée de la musique cubaine et du jazz, c'est la proposition du trompettiste Jorge Vistel. Ce soir, il nous présente ‘Cuban SongBook’, un projet où il revisite des ...",
+    "id": "q7",
+    "question": "Peux-tu me parler de l'événement « Bibliothèque de la Cité des sciences et de l'industrie » à Paris ?",
+    "event_uid": 37729086,
+    "annotated_answer": "Bibliothèque de la Cité des sciences et de l'industrie se déroule à Cité des sciences et de l'Industrie, 30 avenue Corentin Cariou, 75019 Paris (Paris 75019). Période: 2025-12-09T11:00:00+00:00. Bibliothèque en accès libre, gratuit, du mardi au dimanche, de 12h à 18h45. Ressources documentaires à emprunter ou à consulter sur place, espaces de travail, wifi... Évènements et ateliers réguliers.",
     "must_include": [
-      "Jorge Vistel ‘Cuban SongBook’",
-      "JASS CLUB",
-      "Jorge Vistel ‘Cuban SongBook’"
+      "Bibliothèque de la Cité des sciences et de l'industrie",
+      "Cité des sciences et de l'Industrie"
     ],
-    "source_url": "https://openagenda.com/events/jorge-vistel-cuban-songbook"
+    "source_url": "https://openagenda.com/events/bibliotheque-des-sciences-et-de-lindustrie-2104267"
   },
   {
-    "id": "theme-2",
-    "question": "Quels événements autour de « exposition » me recommandes-tu à Paris ?",
-    "event_uid": 84652268,
-    "annotated_answer": "Gulahallat – Rencontres avec l’art contemporain sámi se déroule à Institut finlandais, 60 rue des Écoles (Paris). Période: 2026-09-11T09:00:00+00:00. L’Institut finlandais présente l’exposition Gulahallat – Rencontres avec l’art contemporain sámi qui rassemble des œuvres d’artistes majeurs et une sélection d’artisanat en partenariat avec Oulu 2026.",
+    "id": "q8",
+    "question": "Peux-tu me parler de l'événement « Underground ! La presse alternative des années 1970 en France » à Paris ?",
+    "event_uid": 28834516,
+    "annotated_answer": "Underground ! La presse alternative des années 1970 en France se déroule à Bibliothèque François-Mitterrand – Allée Julien Cain, Quai François Mauriac, 75013, Paris (Paris 75013). Période: 2026-08-19T07:00:00+00:00. Créative, bricolée, contestataire : à la charnière des années 1960 et 1970, une presse parallèle surgit en France, en marge de la presse d’information dite « bourgeoise ». Née dans le sillage de Mai…",
     "must_include": [
-      "Gulahallat – Rencontres avec l’art contemporain sámi",
-      "Institut finlandais",
-      "Gulahallat – Rencontres avec l’art contemporain sámi"
+      "Underground ! La presse alternative des années 1970 en France",
+      "Bibliothèque François-Mitterrand – Allée Julien Cain"
     ],
-    "source_url": "https://openagenda.com/events/gulahallat-rencontres-avec-lart-contemporain-sami"
-  },
-  {
-    "id": "theme-3",
-    "question": "Quels événements autour de « art contemporain » me recommandes-tu à Paris ?",
-    "event_uid": 84652268,
-    "annotated_answer": "Gulahallat – Rencontres avec l’art contemporain sámi se déroule à Institut finlandais, 60 rue des Écoles (Paris). Période: 2026-09-11T09:00:00+00:00. L’Institut finlandais présente l’exposition Gulahallat – Rencontres avec l’art contemporain sámi qui rassemble des œuvres d’artistes majeurs et une sélection d’artisanat en partenariat avec Oulu 2026.",
-    "must_include": [
-      "Gulahallat – Rencontres avec l’art contemporain sámi",
-      "Institut finlandais",
-      "Gulahallat – Rencontres avec l’art contemporain sámi"
-    ],
-    "source_url": "https://openagenda.com/events/gulahallat-rencontres-avec-lart-contemporain-sami"
-  },
-  {
-    "id": "theme-4",
-    "question": "Quels événements autour de « artisanat » me recommandes-tu à Paris ?",
-    "event_uid": 84652268,
-    "annotated_answer": "Gulahallat – Rencontres avec l’art contemporain sámi se déroule à Institut finlandais, 60 rue des Écoles (Paris). Période: 2026-09-11T09:00:00+00:00. L’Institut finlandais présente l’exposition Gulahallat – Rencontres avec l’art contemporain sámi qui rassemble des œuvres d’artistes majeurs et une sélection d’artisanat en partenariat avec Oulu 2026.",
-    "must_include": [
-      "Gulahallat – Rencontres avec l’art contemporain sámi",
-      "Institut finlandais",
-      "Gulahallat – Rencontres avec l’art contemporain sámi"
-    ],
-    "source_url": "https://openagenda.com/events/gulahallat-rencontres-avec-lart-contemporain-sami"
-  },
-  {
-    "id": "venue-1",
-    "question": "Que se passe-t-il à Collège des Bernardins ?",
-    "event_uid": 4953312,
-    "annotated_answer": "Premières rencontres européennes des Bernardins : journée de débats se déroule à Collège des Bernardins, 20 Rue de Poissy, 75005 Paris, France (Paris 75005). Période: 2026-09-12T06:15:00+00:00. Cette journée rassemble des personnalités politiques, économiques, intellectuelles et religieuses de plusieurs pays européens de sensibilités différentes pour leur permettre d’échanger sur l’avenir...",
-    "must_include": [
-      "Premières rencontres européennes des Bernardins : journée de débats",
-      "Collège des Bernardins"
-    ],
-    "source_url": "https://openagenda.com/events/premieres-rencontres-europeennes-des-bernardins-journee-de-debats"
-  },
-  {
-    "id": "area-1",
-    "question": "Propose-moi une sortie culturelle dans le 75005 à Paris.",
-    "event_uid": 4953312,
-    "annotated_answer": "Premières rencontres européennes des Bernardins : journée de débats se déroule à Collège des Bernardins, 20 Rue de Poissy, 75005 Paris, France (Paris 75005). Période: 2026-09-12T06:15:00+00:00. Cette journée rassemble des personnalités politiques, économiques, intellectuelles et religieuses de plusieurs pays européens de sensibilités différentes pour leur permettre d’échanger sur l’avenir...",
-    "must_include": [
-      "Premières rencontres européennes des Bernardins : journée de débats",
-      "Collège des Bernardins"
-    ],
-    "source_url": "https://openagenda.com/events/premieres-rencontres-europeennes-des-bernardins-journee-de-debats"
+    "source_url": "https://openagenda.com/events/underground-la-presse-alternative-des-annees-1970-en-france"
   }
 ]

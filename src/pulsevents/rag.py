@@ -1,15 +1,12 @@
-"""Chaîne RAG LangChain : FAISS + Mistral (réponses augmentées)."""
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
 from typing import Any
 
 from langchain_core.documents import Document
-from langchain_core.output_parsers import StrOutputParser
-from langchain_core.prompts import ChatPromptTemplate
-from langchain_core.runnables import RunnablePassthrough
-from langchain_mistralai import ChatMistralAI
+from langchain_core.output_parsers import StrOutputParser   # it takes the output coming from the LLM and turns it into  python string
+from langchain_core.prompts import ChatPromptTemplate  # class used to create reusable chat prompt templates with placeholders for dynamic values like the user's question and the retrieved context.
+from langchain_mistralai import ChatMistralAI  #LangChain class used to connect the application to a Mistral chat model and generate responses.
 
 from pulsevents.config import CHAT_MODEL, SEARCH_K, require_mistral_key
 from pulsevents.index import load_faiss_index
@@ -39,28 +36,35 @@ PROMPT = ChatPromptTemplate.from_messages(
 )
 
 
-def format_docs(docs: list[Document]) -> str:
+def format_docs(docs: list[Document]) -> str:   # Take the documents/chunks retrieved from FAISS and turn them into one well-organized text string that can be inserted into the {context} placeholder of the prompt.
     blocks = []
     for i, doc in enumerate(docs, start=1):
         meta = doc.metadata or {}
         header = (
             f"[Extrait {i}] {meta.get('title', '')} | "
             f"{meta.get('venue', '')} | {meta.get('city', '')} {meta.get('postal_code', '')} | "
-            f"{meta.get('date_label') or meta.get('date_start', '')} | {meta.get('url', '')}"
+            f"{meta.get('date_start') or meta.get('date_label', '')} | {meta.get('url', '')}"
         )
         blocks.append(f"{header}\n{doc.page_content}")
     return "\n\n---\n\n".join(blocks) if blocks else "Aucun extrait pertinent."
 
 
-@dataclass
-class RAGResult:
-    question: str
-    answer: str
-    sources: list[dict[str, Any]] = field(default_factory=list)
+class RAGResult:  # The main goal of RAG Result is to create a simple object that stores the final result of one user question.
+    """Résultat d'une question : texte + sources."""
+
+    def __init__(
+        self,
+        question: str,
+        answer: str,
+        sources: list[dict[str, Any]] | None = None,
+    ):
+        self.question = question
+        self.answer = answer
+        self.sources = sources if sources is not None else []
 
 
-class EventRAG:
-    """Orchestration LangChain retriever FAISS → LLM Mistral."""
+class EventRAG:   # responsible for running the whole RAG process when the user asks a question.
+
 
     def __init__(self, k: int = SEARCH_K):
         self.k = k
@@ -69,17 +73,8 @@ class EventRAG:
         self.llm = ChatMistralAI(
             model=CHAT_MODEL,
             api_key=require_mistral_key(),
-            temperature=0.2,
+            temperature=0.2,   # Temperature controls how much randomness/variation the LLM uses when generating its answer.
             max_retries=8,
-        )
-        self.chain = (
-            {
-                "context": self.retriever | format_docs,
-                "question": RunnablePassthrough(),
-            }
-            | PROMPT
-            | self.llm
-            | StrOutputParser()
         )
 
     def retrieve(self, question: str) -> list[Document]:
@@ -103,7 +98,7 @@ class EventRAG:
                     "uid": uid,
                     "title": doc.metadata.get("title"),
                     "venue": doc.metadata.get("venue"),
-                    "date_label": doc.metadata.get("date_label") or doc.metadata.get("date_start"),
+                    "date_label": doc.metadata.get("date_start") or doc.metadata.get("date_label"),
                     "url": doc.metadata.get("url"),
                     "city": doc.metadata.get("city"),
                     "excerpt": doc.page_content[:400],

@@ -31,14 +31,12 @@ def build_faiss_index(documents: list[Document]) -> FAISS:
         raise ValueError("Aucun document à indexer.")
 
     embeddings = get_embeddings()
-    logger.info("Création de l'index FAISS (%s chunks, modèle %s)...", len(documents), EMBEDDING_MODEL)
 
     first, rest = documents[:EMBEDDING_BATCH_SIZE], documents[EMBEDDING_BATCH_SIZE:]
     vectorstore = FAISS.from_documents(first, embeddings)
     for start in range(0, len(rest), EMBEDDING_BATCH_SIZE):
         batch = rest[start : start + EMBEDDING_BATCH_SIZE]
         vectorstore.add_documents(batch)
-        logger.info("Index: %s / %s chunks.", min(start + EMBEDDING_BATCH_SIZE, len(rest)) + len(first), len(documents))
 
     save_faiss_index(vectorstore)
     return vectorstore

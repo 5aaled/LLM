@@ -25,7 +25,7 @@ Le système a deux phases. La phase d’indexation (hors ligne) récupère, filt
 
 Chaîne d’indexation : OpenAgenda → JSON brut → filtres Paris + fraîcheur → documents LangChain → chunks → mistral-embed → FAISS.
 
-Chaîne de question : texte utilisateur → embedding → top-k extraits FAISS → prompt système Puls-Events → mistral-small-latest → réponse + sources affichées.
+Chaîne de question : texte utilisateur → embedding → top-k extraits FAISS → prompt système Puls-Events → ministral-8b-latest → réponse + sources affichées.
 
 Les métadonnées (titre, lieu, code postal, dates, URL) voyagent avec chaque chunk. Elles servent à la fois à l’affichage des sources dans la démo et aux tests unitaires de conformité du périmètre.
 
@@ -45,15 +45,15 @@ Le découpage (chunking) utilise RecursiveCharacterTextSplitter de LangChain (1 
 
 LangChain a été retenu parce que le brief l’impose et parce qu’il orchestre proprement retriever, prompt et LLM (LCEL). FAISS CPU (IndexFlatIP, similarité cosinus via vecteurs L2-normalisés côté LangChain/FAISS) convient au volume d’un POC : quelques centaines de vecteurs, recherche exacte, zéro infrastructure. Un index IVF ou HNSW n’apporterait rien à cette échelle et compliquerait la reconstruction.
 
-Mistral est utilisé de bout en bout : mistral-embed (dimension 1024) pour la vectorisation, mistral-small-latest pour la génération. Ce couplage évite un décalage de « langue vectorielle » entre l’index et le modèle de chat. mistral-small-latest a été préféré à mistral-large pour le POC : coût et latence plus bas, français de bonne qualité, suffisant dès lors que le contexte RAG est pertinent. Un passage à un modèle plus grand reste un levier de la version finale.
+Mistral est utilisé de bout en bout : mistral-embed (dimension 1024) pour la vectorisation, ministral-8b-latest pour la génération. Ce couplage évite un décalage de « langue vectorielle » entre l’index et le modèle de chat. ministral-8b-latest a été préféré à mistral-large pour le POC : coût et latence plus bas, français de bonne qualité, suffisant dès lors que le contexte RAG est pertinent. Un passage à un modèle plus grand reste un levier de la version finale.
 
-L’application de démo est un Streamlit local. Les secrets restent dans un fichier .env ignoré par Git. La reconstruction de l’index est un script unique (rebuild_index.py), reproductible dans un environnement virtuel documenté.
+La démo live est le script ask.py : une question en ligne de commande, une réponse, les sources. Les secrets restent dans un fichier .env ignoré par Git. La reconstruction de l’index est un script unique (rebuild_index.py), reproductible dans un environnement virtuel documenté.
 
 
 ## 6. Modèles sélectionnés
 
 - Embeddings : mistral-embed — texte d’événement → vecteur, recherche sémantique.
-- Génération : mistral-small-latest — rédaction des recommandations à partir des extraits.
+- Génération : ministral-8b-latest — rédaction des recommandations à partir des extraits.
 - Température 0,2 — réponses plutôt factuelles, peu créatives.
 - k = 5 extraits — compromis entre couverture et bruit dans le prompt.
 Le prompt système impose le français, l’interdiction d’inventer des événements absents du contexte, et la restitution du titre, du lieu, des dates et de l’URL. Si le contexte est insuffisant, le modèle doit le dire. C’est le principal garde-fou anti-hallucination du POC.
@@ -94,6 +94,6 @@ Le POC démontre qu’un assistant de recommandation culturelle, ancré dans Ope
 
 ## Annexes
 
-- Commandes : python check_setup.py · python rebuild_index.py · pytest · streamlit run app.py · python evaluate.py
+- Commandes : python check_setup.py · python rebuild_index.py · pytest · python ask.py "…" · python evaluate.py
 - Fichiers clés : src/pulsevents/ · tests/test_events_freshness.py · data/evaluation/annotated_qa.json
 - Secrets : fichier .env (jamais versionné).

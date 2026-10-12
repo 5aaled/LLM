@@ -11,7 +11,6 @@ _WS_RE = re.compile(r"\s+")
 
 
 def localized(value: Any, lang: str = "fr") -> str:
-    """OpenAgenda stocke souvent les textes en dict {fr, en, ...}."""
     if value is None:
         return ""
     if isinstance(value, dict):

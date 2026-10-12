@@ -115,7 +115,7 @@ def report_paragraphs(stats: dict) -> list[tuple[str, str]]:
             "comme demandé : chaque question est indépendante.",
         ),
         ("p", "Chaîne d’indexation : OpenAgenda → JSON brut → filtres Paris + fraîcheur → documents LangChain → chunks → mistral-embed → FAISS."),
-        ("p", "Chaîne de question : texte utilisateur → embedding → top-k extraits FAISS → prompt système Puls-Events → mistral-small-latest → réponse + sources affichées."),
+        ("p", "Chaîne de question : texte utilisateur → embedding → top-k extraits FAISS → prompt système Puls-Events → ministral-8b-latest → réponse + sources affichées."),
         (
             "p",
             "Les métadonnées (titre, lieu, code postal, dates, URL) voyagent avec chaque chunk. Elles servent "
@@ -162,13 +162,14 @@ def report_paragraphs(stats: dict) -> list[tuple[str, str]]:
             "p",
             "Mistral est utilisé de bout en bout : mistral-embed (dimension 1024) pour la vectorisation, "
             f"{CHAT_MODEL} pour la génération. Ce couplage évite un décalage de « langue vectorielle » entre "
-            "l’index et le modèle de chat. mistral-small-latest a été préféré à mistral-large pour le POC : "
+            "l’index et le modèle de chat. ministral-8b-latest a été préféré à mistral-large pour le POC : "
             "coût et latence plus bas, français de bonne qualité, suffisant dès lors que le contexte RAG est pertinent. "
             "Un passage à un modèle plus grand reste un levier de la version finale.",
         ),
         (
             "p",
-            "L’application de démo est un Streamlit local. Les secrets restent dans un fichier .env ignoré par Git. "
+            "La démo live est le script ask.py : une question en ligne de commande, une réponse, les sources. "
+            "Les secrets restent dans un fichier .env ignoré par Git. "
             "La reconstruction de l’index est un script unique (rebuild_index.py), reproductible dans un "
             "environnement virtuel documenté.",
         ),
@@ -241,7 +242,7 @@ def report_paragraphs(stats: dict) -> list[tuple[str, str]]:
             "le reranking et l’évaluation produit, plus que sur un changement d’infrastructure.",
         ),
         ("h2", "Annexes"),
-        ("bullet", "Commandes : python check_setup.py · python rebuild_index.py · pytest · streamlit run app.py · python evaluate.py"),
+        ("bullet", "Commandes : python check_setup.py · python rebuild_index.py · pytest · python ask.py \"…\" · python evaluate.py"),
         ("bullet", "Fichiers clés : src/pulsevents/ · tests/test_events_freshness.py · data/evaluation/annotated_qa.json"),
         ("bullet", "Secrets : fichier .env (jamais versionné)."),
     ]
@@ -488,7 +489,7 @@ def write_pptx(stats: dict) -> Path:
         "•  FAISS CPU : index local exact, reconstructible (rebuild_index.py)\n"
         f"•  {EMBEDDING_MODEL} : vecteurs d’événements\n"
         f"•  {CHAT_MODEL} : rédaction, température 0,2\n"
-        "•  Streamlit : démo live pour Produit / Marketing\n"
+        "•  ask.py : démo live en ligne de commande\n"
         "•  Pytest : conformité Paris + fraîcheur < 1 an",
         20,
     )
@@ -502,7 +503,7 @@ def write_pptx(stats: dict) -> Path:
         12,
         5,
         "Le goulot d’un RAG n’est pas la taille du LLM, c’est la qualité du chunk ramené.\n\n"
-        "mistral-small-latest : français solide, coût et latence adaptés à une démo.\n"
+        "ministral-8b-latest : français solide, coût et latence adaptés à une démo.\n"
         "mistral-embed : même écosystème, 1024 dimensions, standard Mistral.\n\n"
         "Version finale : tester un modèle plus grand seulement si la synthèse reste pauvre\n"
         "malgré un bon retrieval.",
